@@ -1,7 +1,7 @@
 # Create a weather app using api's
 import requests
-
-api_key = '5b18ca7cf1df4a78a42155718242007'
+with open("api.txt") as f:
+    api_key = f.read()
 city = input("Enter city: ")
 country = input("Enter Country: ")
 response = requests.get(f"https://api.weatherapi.com/v1/current.json?key={api_key}&q={city},{country}")
@@ -20,15 +20,16 @@ if(status==200):
     last_updated = data["current"].get("last_updated")
 
     def dayornight():
-            diurnal = ""
-            if(data["current"].get("is_day")==0):
-                diurnal = "Night"
-            elif(data["current"].get("is_day")==1):
-                diurnal = "Day"
+        diurnal = ""
+        if(data["current"].get("is_day")==0):
+            diurnal = "Night"
+        elif(data["current"].get("is_day")==1):
+            diurnal = "Day"
 
-            return diurnal
-    
+        return diurnal
+
     diu = dayornight()
+    
     print(f"\nShowing current weather for {city},{region},{country}")
     print(f"temprature: {temp}\ncondition: {condition}\nhumidity: {humidity}\nDiural_cycle: {diu}\nlast updated on {last_updated}")
 
